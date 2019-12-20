@@ -12,14 +12,14 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    
+    // Declares variables that will be used later
     SeekBar numberControl;
 
     ArrayList<Integer> timeTableList = new ArrayList<>();
 
     ArrayAdapter<Integer> arrayAdapter;
 
-
+    // Function that makes a new list of numbers for the numbers list
     ArrayList<Integer> changeArrayList (int newNum) {
         ArrayList<Integer> newList = new ArrayList<>();
 
@@ -35,18 +35,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Gets the seek bar and sets its max and initial progress
         numberControl = (SeekBar) findViewById(R.id.seekBar);
         numberControl.setMax(20);
         numberControl.setProgress(1);
 
+        // Initializes the list
         timeTableList = changeArrayList(1);
+
+        // Initializes the array adapter
+        arrayAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_list_item_1, timeTableList);
 
         ListView numberListView = findViewById(R.id.listView);
 
-        arrayAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_list_item_1, timeTableList);
-
         numberListView.setAdapter(arrayAdapter);
 
+        // Changes the numbers in the array list and updates the view.
         numberControl.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
